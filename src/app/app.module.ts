@@ -9,6 +9,7 @@ import { DummieComponent } from './layouts/dummie/dummie.component';
 import { HeaderModule } from './components/header/header.module';
 import { FooterModule } from './components/footer/footer.module';
 import { SidemenuModule } from './components/sidemenu/sidemenu.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SidemenuModule } from './components/sidemenu/sidemenu.module';
     AppRoutingModule,
     HeaderModule,
     FooterModule,
-    SidemenuModule
+    SidemenuModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent],

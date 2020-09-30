@@ -13,7 +13,7 @@ const routes: Routes = [
       ]
     },
     {
-      path: 'dummie',
+      path: 'playground',
       component: DummieComponent,
       pathMatch: 'full',
     },
