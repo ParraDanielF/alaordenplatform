@@ -10,6 +10,7 @@ public class Account {
 	private String email;
 	private String password;
 	private boolean status;
+	
 	public Account(String accountId, String userId, String email, String password, boolean status) {
 		this.accountId = accountId;
 		this.userId = userId;
@@ -49,7 +50,5 @@ public class Account {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	
-	
 	
 }

@@ -15,8 +15,10 @@ public class Company {
 	private boolean isActive;
 	private String owner;
 	private String segmentCode;
-	private int location;
+	private float longitude;
+	private float latitude;
 	private int country;
+	private int city;
 	
 	@Autowired
 	private List<User> collaborators;
@@ -24,17 +26,17 @@ public class Company {
 	@Autowired
 	private List<Service> services;
 
-	
-	
-	public Company(String name, String address, boolean isActive, String owner, String segmentCode, int location,
-			int country, List<User> collaborators, List<Service> services) {
+	public Company(String name, String address, boolean isActive, String owner, String segmentCode, float longitude,
+			float latitude, int country, int city, List<User> collaborators, List<Service> services) {
 		this.name = name;
 		this.address = address;
 		this.isActive = isActive;
 		this.owner = owner;
 		this.segmentCode = segmentCode;
-		this.location = location;
+		this.longitude = longitude;
+		this.latitude = latitude;
 		this.country = country;
+		this.city = city;
 		this.collaborators = collaborators;
 		this.services = services;
 	}
@@ -79,6 +81,38 @@ public class Company {
 		this.segmentCode = segmentCode;
 	}
 
+	public float getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(float longitude) {
+		this.longitude = longitude;
+	}
+
+	public float getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(float latitude) {
+		this.latitude = latitude;
+	}
+
+	public int getCountry() {
+		return country;
+	}
+
+	public void setCountry(int country) {
+		this.country = country;
+	}
+
+	public int getCity() {
+		return city;
+	}
+
+	public void setCity(int city) {
+		this.city = city;
+	}
+
 	public List<User> getCollaborators() {
 		return collaborators;
 	}
@@ -94,23 +128,5 @@ public class Company {
 	public void setServices(List<Service> services) {
 		this.services = services;
 	}
-
-	public int getLocation() {
-		return location;
-	}
-
-	public void setLocation(int location) {
-		this.location = location;
-	}
-
-	public int getCountry() {
-		return country;
-	}
-
-	public void setCountry(int country) {
-		this.country = country;
-	}
-	
-	
 	
 }
