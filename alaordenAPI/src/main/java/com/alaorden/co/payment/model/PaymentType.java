@@ -8,6 +8,10 @@ public class PaymentType {
 	private int paymentTypeId;
 	private String description;
 	
+	
+	public PaymentType() {
+	}
+
 	public PaymentType(int paymentTypeId, String description) {
 		this.paymentTypeId = paymentTypeId;
 		this.description = description;

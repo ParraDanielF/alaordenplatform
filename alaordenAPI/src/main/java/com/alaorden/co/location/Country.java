@@ -9,6 +9,9 @@ public class Country {
 	private String name;
 	
 	
+	public Country() {
+	}
+
 	public Country(int countryId, String name) {
 		this.countryId = countryId;
 		this.name = name;

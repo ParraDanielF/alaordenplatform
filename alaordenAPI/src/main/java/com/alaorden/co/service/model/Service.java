@@ -14,6 +14,9 @@ public class Service {
 	private boolean isNegotiable;
 	private float score;
 	
+	public Service() {
+	}
+
 	public Service(String serviceId, String companyId, String serviceType, String name, String description, float price,
 			boolean isNegotiable, float score) {
 		this.serviceId = serviceId;

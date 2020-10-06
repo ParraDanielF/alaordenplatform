@@ -8,6 +8,10 @@ public class documentType {
 	private int documentTypeId;
 	private String name;
 	
+	
+	public documentType() {
+	}
+
 	public documentType(int documentTypeId, String name) {
 		this.documentTypeId = documentTypeId;
 		this.name = name;

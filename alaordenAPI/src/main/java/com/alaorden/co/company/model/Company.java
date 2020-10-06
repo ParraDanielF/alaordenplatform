@@ -26,6 +26,9 @@ public class Company {
 	@Autowired
 	private List<Service> services;
 
+	public Company() {
+	}
+
 	public Company(String name, String address, boolean isActive, String owner, String segmentCode, float longitude,
 			float latitude, int country, int city, List<User> collaborators, List<Service> services) {
 		this.name = name;

@@ -12,6 +12,10 @@ public class Comment {
 	private String comment;
 	private Date createdAt;
 	
+	
+	public Comment() {
+	}
+
 	public Comment(String userId, String contractId, String comment, Date createdAt) {
 		this.userId = userId;
 		this.contractId = contractId;

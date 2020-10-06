@@ -20,7 +20,8 @@ public class Contract {
 	@Autowired
 	private List<Service> services;
 
-
+	public Contract() {
+	}
 
 	public Contract(String contractId, String companyId, String userId, int paymentTypeId, Date contractDate,
 			List<Service> services) {

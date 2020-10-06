@@ -12,7 +12,9 @@ public class Address {
 	private float longitude;
 	private float latitude;
 	
-	
+	public Address() {
+	}
+
 	public Address(int addressId, String name, String address, boolean isTheMainAddress) {
 		this.addressId = addressId;
 		this.name = name;

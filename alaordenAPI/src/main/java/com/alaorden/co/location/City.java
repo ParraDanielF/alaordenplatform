@@ -8,6 +8,9 @@ public class City {
 	private int cityId;
 	private String name;
 	
+	public City() {
+	}
+
 	public City(int cityId, String name) {
 		this.cityId = cityId;
 		this.name = name;

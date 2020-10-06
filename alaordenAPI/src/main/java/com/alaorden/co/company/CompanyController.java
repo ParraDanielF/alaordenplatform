@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alaorden.co.util.ServiceResponse;
 
-@Controller("company")
+@Controller
 @RequestMapping("/company")
 public class CompanyController {
 

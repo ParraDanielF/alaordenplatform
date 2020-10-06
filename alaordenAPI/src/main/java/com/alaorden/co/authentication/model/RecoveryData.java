@@ -9,7 +9,9 @@ public class RecoveryData {
 	private String recoveryToken;
 	private String expiredAt;
 	
-	
+	public RecoveryData() {
+	}
+
 	public RecoveryData(String accountId, String recoveryToken, String expiredAt) {
 		this.accountId = accountId;
 		this.recoveryToken = recoveryToken;

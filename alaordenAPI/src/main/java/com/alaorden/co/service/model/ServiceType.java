@@ -9,6 +9,10 @@ public class ServiceType {
 	private String name;
 	private String description;
 	
+	
+	public ServiceType() {
+	}
+
 	public ServiceType(int serviceType, String name, String description) {
 		this.serviceType = serviceType;
 		this.name = name;
