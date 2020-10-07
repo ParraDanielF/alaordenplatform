@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dummie',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DummieComponent implements OnInit {
 
-  constructor() { }
+  profileForm = this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: [''],
+    email: ['', Validators.email],
+    password: ['', Validators.minLength(6)],
+  });
+  
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
   }

@@ -37,3 +37,31 @@
     <ngb-datepicker #dp></ngb-datepicker>
   </div>
 </div>
+<h2> Formularios</h2>
+<div class="row">
+  <div class="col-lg-6 col-xl-6">
+    <form [formGroup]="profileForm">
+  
+      <label>
+        First Name:
+        <input type="text" formControlName="firstName">
+      </label>
+    
+      <label>
+        Last Name:
+        <input type="text" formControlName="lastName">
+      </label>
+
+      <label>
+        email:
+        <input type="text" formControlName="email">
+      </label>
+
+      <label>
+        password:
+        <input type="text" formControlName="password">
+      </label>
+      <button type="submit" class="btn btn-primary">validate</button>
+    </form>
+  </div>
+</div>
