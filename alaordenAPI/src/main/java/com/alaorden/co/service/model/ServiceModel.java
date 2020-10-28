@@ -3,7 +3,7 @@ package com.alaorden.co.service.model;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Service {
+public class ServiceModel {
 	
 	private String serviceId;
 	private String companyId;
@@ -14,10 +14,10 @@ public class Service {
 	private boolean isNegotiable;
 	private float score;
 	
-	public Service() {
+	public ServiceModel() {
 	}
 
-	public Service(String serviceId, String companyId, String serviceType, String name, String description, float price,
+	public ServiceModel(String serviceId, String companyId, String serviceType, String name, String description, float price,
 			boolean isNegotiable, float score) {
 		this.serviceId = serviceId;
 		this.companyId = companyId;

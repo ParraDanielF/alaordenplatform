@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.alaorden.co.service.model.Service;
+import com.alaorden.co.service.model.ServiceModel;
 import com.alaorden.co.user.User;
 
 @Component
@@ -24,13 +24,13 @@ public class Company {
 	private List<User> collaborators;
 	
 	@Autowired
-	private List<Service> services;
+	private List<ServiceModel> services;
 
 	public Company() {
 	}
 
 	public Company(String name, String address, boolean isActive, String owner, String segmentCode, float longitude,
-			float latitude, int country, int city, List<User> collaborators, List<Service> services) {
+			float latitude, int country, int city, List<User> collaborators, List<ServiceModel> services) {
 		this.name = name;
 		this.address = address;
 		this.isActive = isActive;
@@ -124,11 +124,11 @@ public class Company {
 		this.collaborators = collaborators;
 	}
 
-	public List<Service> getServices() {
+	public List<ServiceModel> getServices() {
 		return services;
 	}
 
-	public void setServices(List<Service> services) {
+	public void setServices(List<ServiceModel> services) {
 		this.services = services;
 	}
 	

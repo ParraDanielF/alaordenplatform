@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.alaorden.co.service.model.Service;
+import com.alaorden.co.service.model.ServiceModel;
 import com.alaorden.co.util.ServiceResponse;
 
 @Controller
 @RequestMapping("/service")
-public class ServiceController {
+public class ServicesController {
 	
 	@PostMapping("/")
 	public ServiceResponse createService() {
@@ -33,7 +33,7 @@ public class ServiceController {
 	}
 	
 	@GetMapping("/{serviceId}")
-	public List<Service> getServices(@PathVariable(required = false) String serviceId) {
+	public List<ServiceModel> getServices(@PathVariable(required = false) String serviceId) {
 		return null;
 	}
 }

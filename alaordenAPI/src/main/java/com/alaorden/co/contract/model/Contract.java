@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.alaorden.co.service.model.Service;
+import com.alaorden.co.service.model.ServiceModel;
 
 @Component
 public class Contract {
@@ -18,13 +18,13 @@ public class Contract {
 	private Date contractDate;
 
 	@Autowired
-	private List<Service> services;
+	private List<ServiceModel> services;
 
 	public Contract() {
 	}
 
 	public Contract(String contractId, String companyId, String userId, int paymentTypeId, Date contractDate,
-			List<Service> services) {
+			List<ServiceModel> services) {
 		this.contractId = contractId;
 		this.companyId = companyId;
 		this.userId = userId;
@@ -65,11 +65,11 @@ public class Contract {
 		this.paymentTypeId = paymentTypeId;
 	}
 
-	public List<Service> getServices() {
+	public List<ServiceModel> getServices() {
 		return services;
 	}
 
-	public void setServices(List<Service> services) {
+	public void setServices(List<ServiceModel> services) {
 		this.services = services;
 	}
 
