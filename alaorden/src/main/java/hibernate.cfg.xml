@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/alaorden_dev</property>
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <mapping class="com.co.alaorden.model.AccountEntity"/>
+        <mapping class="com.co.alaorden.model.AddressEntity"/>
+        <mapping class="com.co.alaorden.model.CityEntity"/>
+        <mapping class="com.co.alaorden.model.CommentEntity"/>
+        <mapping class="com.co.alaorden.model.CompanyEntity"/>
+        <mapping class="com.co.alaorden.model.CompanyCollaboratorsEntity"/>
+        <mapping class="com.co.alaorden.model.ContractEntity"/>
+        <mapping class="com.co.alaorden.model.ContractServicesEntity"/>
+        <mapping class="com.co.alaorden.model.CountryEntity"/>
+        <mapping class="com.co.alaorden.model.DocumentTypeEntity"/>
+        <mapping class="com.co.alaorden.model.PaymentTypeEntity"/>
+        <mapping class="com.co.alaorden.model.RecoveryDataEntity"/>
+        <mapping class="com.co.alaorden.model.RoleEntity"/>
+        <mapping class="com.co.alaorden.model.ServiceEntity"/>
+        <mapping class="com.co.alaorden.model.ServiceTypeEntity"/>
+        <mapping class="com.co.alaorden.model.UserEntity"/>
+        <!-- <property name="connection.username"/> -->
+        <!-- <property name="connection.password"/> -->
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>
