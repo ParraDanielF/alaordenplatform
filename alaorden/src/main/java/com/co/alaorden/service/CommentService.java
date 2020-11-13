@@ -4,7 +4,7 @@ import com.co.alaorden.model.CommentEntity;
 import com.co.alaorden.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class CommentServices {
+public class CommentService {
     @Autowired
     CommentRepository commentRepository;
 

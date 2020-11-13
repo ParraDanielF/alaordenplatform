@@ -4,7 +4,7 @@ import com.co.alaorden.model.CityEntity;
 import com.co.alaorden.repository.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class CityServices {
+public class CityService {
     @Autowired
     CityRepository cityRepository;
 

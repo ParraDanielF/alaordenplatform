@@ -4,7 +4,7 @@ import com.co.alaorden.model.AccountEntity;
 import com.co.alaorden.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class AccountServices {
+public class AccountService {
     @Autowired
     AccountRepository accountRepository;
 
