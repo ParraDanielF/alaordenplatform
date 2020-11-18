@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "User", schema = "alaorden_dev", catalog = "")
+@Table(name = "User", schema = "alaorden_dev")
 public class UserEntity {
     private String id;
     private String name;
@@ -113,5 +113,19 @@ public class UserEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, document, documentType, lastName, country, city, phone);
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", document='" + document + '\'' +
+                ", documentType=" + documentType +
+                ", lastName='" + lastName + '\'' +
+                ", country=" + country +
+                ", city=" + city +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }

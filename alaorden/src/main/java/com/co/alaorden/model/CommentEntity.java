@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Comment", schema = "alaorden_dev", catalog = "")
+@Table(name = "Comment", schema = "alaorden_dev")
 public class CommentEntity {
     private int id;
     private String userId;
