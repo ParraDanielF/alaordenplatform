@@ -1,5 +1,6 @@
 package com.co.alaorden.controller;
 
+import com.co.alaorden.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,9 +14,12 @@ import com.co.alaorden.model.AccountEntity;
 import com.co.alaorden.model.ServiceResponse;
 import com.co.alaorden.service.AccountService;
 
+import java.util.logging.Logger;
+
 @RestController()
 @RequestMapping(value="/auth")
 public class AuthController {
+    private static Logger logger = Logger.getLogger(AuthController.class.getName());
 
     @Autowired
     private AccountService accountService;
@@ -24,7 +28,7 @@ public class AuthController {
     public ResponseEntity<ServiceResponse> registrarUsuario(@RequestBody AccountEntity user){
         try {
             Boolean authResponse = accountService.validateCredentials(user);
-            System.out.println("[RESPONSE]" + authResponse);
+            logger.info("[RESPONSE] " + authResponse);
             ServiceResponse response = new ServiceResponse();
             
             if (authResponse) {

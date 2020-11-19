@@ -5,8 +5,12 @@ import com.co.alaorden.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.logging.Logger;
+
 @Component
 public class AccountService {
+    private static Logger logger = Logger.getLogger(AccountService.class.getName());
+
     @Autowired
     AccountRepository accountRepository;
 
@@ -19,10 +23,10 @@ public class AccountService {
     }
     
     public Boolean validateCredentials(AccountEntity account){
-    	System.out.println(account.getEmail() + account.getPassword());
+    	logger.info(account.getEmail() + " " + account.getPassword());
     	String email = account.getEmail();
-    	AccountEntity accountData = accountRepository.findByEmail(email);
-    	System.out.println("[RESPONSE]" + accountData);
+    	AccountEntity accountData = accountRepository.findByEmail(email).get();
+    	logger.info("[RESPONSE]" + accountData);
     	if(accountData != null) {
     		return account.getPassword().equals(accountData.getPassword());
     	}else {
