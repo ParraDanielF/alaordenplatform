@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://localhost:3306/alaorden_dev</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/alaorden_dev?serverTimezone=America/Bogota</property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <mapping class="com.co.alaorden.model.AccountEntity"/>
         <mapping class="com.co.alaorden.model.AddressEntity"/>

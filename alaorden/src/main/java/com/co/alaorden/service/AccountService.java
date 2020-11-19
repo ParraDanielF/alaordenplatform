@@ -3,7 +3,9 @@ package com.co.alaorden.service;
 import com.co.alaorden.model.AccountEntity;
 import com.co.alaorden.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AccountService {
     @Autowired
     AccountRepository accountRepository;
@@ -14,6 +16,19 @@ public class AccountService {
 
     public AccountEntity read(Integer id){
         return accountRepository.findById(id).get();
+    }
+    
+    public Boolean validateCredentials(AccountEntity account){
+    	System.out.println(account.getEmail() + account.getPassword());
+    	String email = account.getEmail();
+    	AccountEntity accountData = accountRepository.findByEmail(email);
+    	System.out.println("[RESPONSE]" + accountData);
+    	if(accountData != null) {
+    		return account.getPassword().equals(accountData.getPassword());
+    	}else {
+    		return false;
+    	}
+    	
     }
 
     public AccountEntity update(AccountEntity account, Integer id){
