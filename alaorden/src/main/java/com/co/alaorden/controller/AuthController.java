@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.co.alaorden.model.AccountEntity;
 import com.co.alaorden.model.ServiceResponse;
+import com.co.alaorden.model.UserEntity;
 import com.co.alaorden.service.AccountService;
 
 import java.util.logging.Logger;
@@ -23,24 +24,28 @@ public class AuthController {
 
     @Autowired
     private AccountService accountService;
+    
+    @Autowired
+    private UserService userService;
 	
     @RequestMapping (value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ServiceResponse> registrarUsuario(@RequestBody AccountEntity user){
+    public ResponseEntity<UserEntity> registrarUsuario(@RequestBody AccountEntity user){
         try {
-            Boolean authResponse = accountService.validateCredentials(user);
-            logger.info("[RESPONSE] " + authResponse);
+            AccountEntity authResponse = accountService.validateCredentials(user);
             ServiceResponse response = new ServiceResponse();
             
-            if (authResponse) {
-            	response.setMessage("{response : true}");
-                return new ResponseEntity<>(response, HttpStatus.OK);
+            /** get the user info*/
+            UserEntity userData = userService.read(authResponse.getUserId());
+            
+            if (userData != null) {
+                return new ResponseEntity<>(userData, HttpStatus.OK);
             }
             else {
-            	response.setMessage("{response : false}");
-                return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+                return new ResponseEntity<>(new UserEntity(), HttpStatus.NO_CONTENT);
             }
         }catch (Exception e){
-            return new ResponseEntity<>(new ServiceResponse(), HttpStatus.BAD_REQUEST);
+        	e.printStackTrace();
+            return new ResponseEntity<>(new UserEntity(), HttpStatus.BAD_REQUEST);
         }
     }
 }

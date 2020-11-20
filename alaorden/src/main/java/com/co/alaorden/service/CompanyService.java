@@ -3,7 +3,9 @@ package com.co.alaorden.service;
 import com.co.alaorden.model.CompanyEntity;
 import com.co.alaorden.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CompanyService {
     @Autowired
     CompanyRepository companyRepository;

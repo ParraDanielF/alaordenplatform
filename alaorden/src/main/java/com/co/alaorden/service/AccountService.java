@@ -22,17 +22,20 @@ public class AccountService {
         return accountRepository.findById(id).get();
     }
     
-    public Boolean validateCredentials(AccountEntity account){
+    public AccountEntity validateCredentials(AccountEntity account){
     	logger.info(account.getEmail() + " " + account.getPassword());
     	String email = account.getEmail();
-    	AccountEntity accountData = accountRepository.findByEmail(email).get();
-    	logger.info("[RESPONSE]" + accountData);
+    	AccountEntity accountData = accountRepository.findByEmail(email);
+    	System.out.println("[RESPONSE]");
+    	logger.info("[RESPONSE]" + accountData.getPassword());
     	if(accountData != null) {
-    		return account.getPassword().equals(accountData.getPassword());
-    	}else {
-    		return false;
+    		if(account.getPassword().equals(accountData.getPassword())) {
+    			return account;
+    		}else {
+    			return null;
+    		}
     	}
-    	
+    	return null;
     }
 
     public AccountEntity update(AccountEntity account, Integer id){

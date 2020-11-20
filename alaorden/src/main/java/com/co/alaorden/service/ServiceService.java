@@ -2,6 +2,9 @@ package com.co.alaorden.service;
 
 import com.co.alaorden.model.ServiceEntity;
 import com.co.alaorden.repository.ServiceRepository;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ServiceService {
@@ -10,6 +13,16 @@ public class ServiceService {
 
     public ServiceEntity create (ServiceEntity service){
         return serviceRepository.save(service);
+    }
+    
+    public Boolean createMany (List<ServiceEntity> services){
+    	try {
+    		serviceRepository.saveAll(services);
+    		return true;
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    		return false;
+    	}
     }
 
     public ServiceEntity read (Integer id){
