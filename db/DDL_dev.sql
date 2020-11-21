@@ -147,3 +147,11 @@ CREATE TABLE Comment(
 	FOREIGN KEY (userId) REFERENCES User(id),
 	FOREIGN KEY (contractId) REFERENCES Contract(id)
 );
+
+CREATE TABLE Notifications (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  notificationMessage TEXT NOT NULL,
+  readStatus BOOLEAN NOT NULL,
+  User_id VARCHAR(50) NOT NULL,
+  FOREIGN KEY (User_id) REFERENCES User (id)
+);
