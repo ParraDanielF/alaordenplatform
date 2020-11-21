@@ -16,6 +16,7 @@
         <mapping class="com.co.alaorden.model.ContractServicesEntity"/>
         <mapping class="com.co.alaorden.model.CountryEntity"/>
         <mapping class="com.co.alaorden.model.DocumentTypeEntity"/>
+        <mapping class="com.co.alaorden.model.NotificationsEntity"/>
         <mapping class="com.co.alaorden.model.PaymentTypeEntity"/>
         <mapping class="com.co.alaorden.model.RecoveryDataEntity"/>
         <mapping class="com.co.alaorden.model.RoleEntity"/>
