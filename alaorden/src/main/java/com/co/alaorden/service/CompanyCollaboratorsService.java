@@ -3,7 +3,9 @@ package com.co.alaorden.service;
 import com.co.alaorden.model.CompanyCollaboratorsEntity;
 import com.co.alaorden.repository.CompanyCollaboratorsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CompanyCollaboratorsService {
     @Autowired
     CompanyCollaboratorsRepository companyCollaboratorsRepository;

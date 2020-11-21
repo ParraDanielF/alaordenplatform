@@ -13,6 +13,7 @@ public class AddressEntity {
     private Byte isTheMainAddress;
     private Double longitude;
     private Double latitude;
+    private int cityId;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -83,6 +84,17 @@ public class AddressEntity {
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
+    
+    @Basic
+    @Column(name = "cityId", nullable = false)
+    public int getCityId() {
+        return id;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
+    }
+    
 
     @Override
     public boolean equals(Object o) {

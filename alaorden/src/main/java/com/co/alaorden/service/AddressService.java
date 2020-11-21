@@ -3,9 +3,11 @@ package com.co.alaorden.service;
 import com.co.alaorden.model.AddressEntity;
 import com.co.alaorden.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class AddressService {
     @Autowired
     AddressRepository addressRepository;
@@ -16,6 +18,10 @@ public class AddressService {
 
     public AddressEntity read (Integer id){
         return addressRepository.findById(id).get();
+    }
+    
+    public List<AddressEntity> readAllByUser (String userId){
+        return addressRepository.findByUser(userId);
     }
 
     public AddressEntity update(AddressEntity addres, Integer id){

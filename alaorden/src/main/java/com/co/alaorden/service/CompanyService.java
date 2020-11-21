@@ -2,6 +2,9 @@ package com.co.alaorden.service;
 
 import com.co.alaorden.model.CompanyEntity;
 import com.co.alaorden.repository.CompanyRepository;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +19,10 @@ public class CompanyService {
 
     public CompanyEntity read(Integer id){
         return companyRepository.findById(id).get();
+    }
+    
+    public List<CompanyEntity> readAll(){
+        return companyRepository.findAll();
     }
 
     public CompanyEntity update(CompanyEntity company, Integer id){

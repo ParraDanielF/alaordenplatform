@@ -1,5 +1,7 @@
 package com.co.alaorden.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -58,6 +60,19 @@ public class CompanyController {
                 return new ResponseEntity<>("Error interno del servidor", HttpStatus.INTERNAL_SERVER_ERROR);
         }catch (Exception e){
             return new ResponseEntity<>("Error interno del servidor", HttpStatus.BAD_REQUEST);
+        }
+    }
+    
+    @RequestMapping (value = "/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CompanyEntity>> read(){
+        try {
+        	List<CompanyEntity> companies = companyService.readAll();
+            if (companies.size() > 0)
+                return new ResponseEntity<>(companies, HttpStatus.OK);
+            else
+                return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 }

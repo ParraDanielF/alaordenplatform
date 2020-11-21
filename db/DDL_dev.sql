@@ -133,7 +133,9 @@ CREATE TABLE Address(
 	isTheMainAddress BOOLEAN,
 	longitude FLOAT,
 	latitude FLOAT,
-	FOREIGN KEY (userId) REFERENCES User(id)
+    cityId INT,
+	FOREIGN KEY (userId) REFERENCES User(id),
+    FOREIGN KEY (cityId) REFERENCES City(id)
 );
 
 CREATE TABLE Comment(
