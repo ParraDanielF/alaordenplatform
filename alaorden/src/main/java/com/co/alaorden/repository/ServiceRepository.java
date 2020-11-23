@@ -21,5 +21,5 @@ public interface ServiceRepository extends JpaRepository<ServiceEntity,Integer> 
 			+ " WHERE s.serviceType = :type"
 			+ " AND ct.id = :city"
 			+ " AND NOT EXISTS (SELECT * FROM Contract WHERE contractDate = :date )", nativeQuery = true)
-	List<ServiceEntity> findByEmail(@Param("date") Date date, @Param("type") String type, @Param("city") int city);
+	List<ServiceEntity> searchServices(@Param("date") Date date, @Param("type") int type, @Param("city") int city);
 }

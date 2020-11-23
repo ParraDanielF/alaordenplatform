@@ -3,7 +3,9 @@ package com.co.alaorden.service;
 import com.co.alaorden.model.ContractEntity;
 import com.co.alaorden.repository.ContractRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ContractService {
     @Autowired
     ContractRepository contractRepository;

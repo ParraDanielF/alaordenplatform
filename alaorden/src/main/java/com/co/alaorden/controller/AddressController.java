@@ -29,7 +29,7 @@ public class AddressController {
         	AddressEntity newAddress = addressService.create(address);
             
             if (newAddress != null)
-                return new ResponseEntity<>("Direccion creado correctamente", HttpStatus.OK);
+                return new ResponseEntity<>("Direccion creada correctamente", HttpStatus.OK);
             else
                 return new ResponseEntity<>("Error interno del servidor", HttpStatus.INTERNAL_SERVER_ERROR);
         }catch (Exception e){

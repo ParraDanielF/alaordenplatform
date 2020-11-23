@@ -12,6 +12,7 @@ public class ContractEntity {
     private String userId;
     private int paymentTypeId;
     private Date contractDate;
+    private String state;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -61,6 +62,16 @@ public class ContractEntity {
 
     public void setContractDate(Date contractDate) {
         this.contractDate = contractDate;
+    }
+    
+    @Basic
+    @Column(name = "state", nullable = false, length = 1)
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     @Override

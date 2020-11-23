@@ -93,6 +93,7 @@ CREATE TABLE Contract(
 	userId VARCHAR(50) NOT NULL,
 	paymentTypeId INT NOT NULL,
 	contractDate DATE,
+    state CHAR(1) NOT NULL,
 	FOREIGN KEY (companyId) REFERENCES Company(id),
 	FOREIGN KEY (userId) REFERENCES User(id),
 	FOREIGN KEY (paymentTypeId) REFERENCES PaymentType(id)
@@ -152,6 +153,6 @@ CREATE TABLE Notifications (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   notificationMessage TEXT NOT NULL,
   readStatus BOOLEAN NOT NULL,
-  User_id VARCHAR(50) NOT NULL,
-  FOREIGN KEY (User_id) REFERENCES User (id)
+  userId VARCHAR(50) NOT NULL,
+  FOREIGN KEY (userId) REFERENCES User (id)
 );

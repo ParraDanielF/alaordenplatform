@@ -4,7 +4,9 @@ import com.co.alaorden.model.DocumentTypeEntity;
 import com.co.alaorden.model.NotificationsEntity;
 import com.co.alaorden.repository.NotificationsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class NotificationsService {
     @Autowired
     NotificationsRepository notificationsRepository;

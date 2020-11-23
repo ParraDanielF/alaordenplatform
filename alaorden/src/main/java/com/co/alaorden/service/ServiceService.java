@@ -1,6 +1,7 @@
 package com.co.alaorden.service;
 
 import com.co.alaorden.model.ServiceEntity;
+import com.co.alaorden.model.ServiceFilter;
 import com.co.alaorden.repository.ServiceRepository;
 
 import java.util.List;
@@ -30,7 +31,11 @@ public class ServiceService {
     public ServiceEntity read (Integer id){
         return serviceRepository.findById(id).get();
     }
-
+    
+    public List<ServiceEntity> searchServices (ServiceFilter filter){
+        return serviceRepository.searchServices(filter.getDate(), filter.getType(), filter.getCityId());
+    }
+    
     public ServiceEntity update (ServiceEntity service, Integer id){
         ServiceEntity tmpService = serviceRepository.findById(id).get();
         tmpService.setCompanyId(service.getCompanyId());

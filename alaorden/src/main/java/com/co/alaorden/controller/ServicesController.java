@@ -42,18 +42,18 @@ public class ServicesController {
         }
     }
     
-    @RequestMapping (value = "/create-from-user/{userId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> BuscarServiciosDisponibles(@RequestBody ServiceFilter filter){
+    @RequestMapping (value = "/search", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ServiceEntity>> BuscarServiciosDisponibles(@RequestBody ServiceFilter filter){
         try {
         	
-        	Boolean transactionResponse = servicesService.createMany(services);
+        	List<ServiceEntity> transactionResponse = servicesService.searchServices(filter);
             
-            if (transactionResponse == true)
-                return new ResponseEntity<>("Servicios creados correctamente", HttpStatus.OK);
+            if (transactionResponse != null)
+                return new ResponseEntity<>(transactionResponse, HttpStatus.OK);
             else
-                return new ResponseEntity<>("Error interno del servidor", HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }catch (Exception e){
-            return new ResponseEntity<>("Error interno del servidor", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 }

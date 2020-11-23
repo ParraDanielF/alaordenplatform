@@ -8,6 +8,7 @@ public class NotificationsEntity {
     private int id;
     private String notificationMessage;
     private byte readStatus;
+    private String userId;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -27,6 +28,16 @@ public class NotificationsEntity {
 
     public void setNotificationMessage(String notificationMessage) {
         this.notificationMessage = notificationMessage;
+    }
+    
+    @Basic
+    @Column(name = "userId", nullable = false)
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Basic
