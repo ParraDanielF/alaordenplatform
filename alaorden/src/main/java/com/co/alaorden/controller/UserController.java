@@ -1,11 +1,9 @@
 package com.co.alaorden.controller;
 
 import com.co.alaorden.model.AccountEntity;
-import com.co.alaorden.model.AddressEntity;
 import com.co.alaorden.model.UserEntity;
-import com.co.alaorden.model.UserRegisterEntity;
+import com.co.alaorden.util.pojo.UserRegister;
 import com.co.alaorden.service.AccountService;
-import com.co.alaorden.service.AddressService;
 import com.co.alaorden.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,12 +12,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.logging.Logger;
 
 @RestController()
 @RequestMapping(value="/user")
 public class UserController {
+    private static Logger logger = Logger.getLogger(UserController.class.getName());
 
     @Autowired
     private UserService userService;
@@ -28,19 +28,13 @@ public class UserController {
     private AccountService accountService;
 
     @RequestMapping (value = "/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> registrarUsuario(@RequestBody UserRegisterEntity user){
+    public ResponseEntity<String> registrarUsuario(@RequestBody UserRegister registro){
         try {
-            UserEntity newUser = userService.create(user);
-            /** set the account data*/
-            AccountEntity account = new AccountEntity();
-            account.setUserId(newUser.getId());
-            account.setEmail(user.getEmail());
-            account.setPassword(user.getPassword());
-            account.setStatus((byte) 1);
-            account.setRoleId(1);
-            
-            AccountEntity newAccount = accountService.create(account);
-            
+            UserEntity newUser = userService.create(registro.getUser());
+            logger.info(String.valueOf(newUser==null));
+            AccountEntity newAccount = accountService.create(registro.getAccount());
+            logger.info(String.valueOf(newAccount==null));
+
             if (newUser != null && newAccount != null)
                 return new ResponseEntity<>("Usuario creado correctamente", HttpStatus.OK);
             else

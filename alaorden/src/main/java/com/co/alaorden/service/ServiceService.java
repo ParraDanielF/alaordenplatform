@@ -1,7 +1,7 @@
 package com.co.alaorden.service;
 
 import com.co.alaorden.model.ServiceEntity;
-import com.co.alaorden.model.ServiceFilter;
+import com.co.alaorden.util.pojo.ServiceFilter;
 import com.co.alaorden.repository.ServiceRepository;
 
 import java.util.List;

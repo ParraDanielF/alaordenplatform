@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.co.alaorden.model.AccountEntity;
-import com.co.alaorden.model.ServiceResponse;
+import com.co.alaorden.util.pojo.ServiceResponse;
 import com.co.alaorden.model.UserEntity;
 import com.co.alaorden.service.AccountService;
 

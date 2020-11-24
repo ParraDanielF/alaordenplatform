@@ -1,4 +1,4 @@
-package com.co.alaorden.model;
+package com.co.alaorden.util.pojo;
 
 public class ServiceResponse {
 	

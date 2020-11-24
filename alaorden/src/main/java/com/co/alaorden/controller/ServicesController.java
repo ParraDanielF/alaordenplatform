@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.co.alaorden.model.ServiceEntity;
-import com.co.alaorden.model.ServiceFilter;
+import com.co.alaorden.util.pojo.ServiceFilter;
 import com.co.alaorden.service.ServiceService;
 
 @RestController()
