@@ -1,9 +1,15 @@
 package com.co.alaorden.model;
 
-public class UserRegisterEntity extends UserEntity{
+import javax.persistence.*;
+
+public class UserRegisterEntity{
 	
 	public String password;
 	public String email;
+	
+	public UserRegisterEntity() {
+
+	}
 	
 	public String getPassword() {
 		return password;
@@ -17,6 +23,7 @@ public class UserRegisterEntity extends UserEntity{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
 	
 	
 }

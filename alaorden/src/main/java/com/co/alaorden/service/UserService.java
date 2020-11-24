@@ -15,7 +15,6 @@ public class UserService {
     UserRepository userRepository;
 
     public UserEntity create (UserEntity user){
-        logger.info("Se va a crear el usario " + user.toString());
         return userRepository.save(user);
     }
 
