@@ -1,6 +1,7 @@
 package com.co.alaorden.controller;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,14 +19,15 @@ import com.co.alaorden.service.AddressService;
 @RestController()
 @RequestMapping(value="/address")
 public class AddressController {
+    private static Logger logger = Logger.getLogger(AddressController.class.getName());
 	
 	@Autowired
 	private AddressService addressService;
 
-    @RequestMapping (value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping (value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> AnadirDireccion(@RequestBody AddressEntity address){
         try {
-        	
+        	logger.info(address.toString());
         	AddressEntity newAddress = addressService.create(address);
             
             if (newAddress != null)

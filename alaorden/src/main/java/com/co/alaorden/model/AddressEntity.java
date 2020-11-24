@@ -94,7 +94,8 @@ public class AddressEntity {
     public void setCityId(int cityId) {
         this.cityId = cityId;
     }
-    
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -107,11 +108,26 @@ public class AddressEntity {
                 Objects.equals(address, that.address) &&
                 Objects.equals(isTheMainAddress, that.isTheMainAddress) &&
                 Objects.equals(longitude, that.longitude) &&
-                Objects.equals(latitude, that.latitude);
+                Objects.equals(latitude, that.latitude) &&
+                Objects.equals(cityId, that.cityId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, name, address, isTheMainAddress, longitude, latitude);
+        return Objects.hash(id, userId, name, address, isTheMainAddress, longitude, latitude, cityId);
+    }
+
+    @Override
+    public String toString() {
+        return "AddressEntity{" +
+                "id=" + id +
+                ", userId='" + userId + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", isTheMainAddress=" + isTheMainAddress +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", cityId=" + cityId +
+                '}';
     }
 }
