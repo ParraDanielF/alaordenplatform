@@ -32,10 +32,10 @@ public class AccountService {
     		if(account.getPassword().equals(accountData.getPassword())) {
     			return account;
     		}else {
-    			return null;
+    			return new AccountEntity();
     		}
     	}
-    	return null;
+		return accountData;
     }
 
     public AccountEntity update(AccountEntity account, Integer id){
