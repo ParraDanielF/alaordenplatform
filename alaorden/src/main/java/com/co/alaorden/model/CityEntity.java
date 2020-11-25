@@ -1,10 +1,9 @@
 package com.co.alaorden.model;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
-@Table(name = "City", schema = "alaorden_dev")
+@Table(name = "City", schema = "alaorden_dev", catalog = "")
 public class CityEntity {
     private int id;
     private String name;
@@ -33,13 +32,19 @@ public class CityEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         CityEntity that = (CityEntity) o;
-        return id == that.id &&
-                Objects.equals(name, that.name);
+
+        if (id != that.id) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 }

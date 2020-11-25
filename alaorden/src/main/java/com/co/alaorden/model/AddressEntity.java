@@ -1,10 +1,9 @@
 package com.co.alaorden.model;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
-@Table(name = "Address", schema = "alaorden_dev")
+@Table(name = "Address", schema = "alaorden_dev", catalog = "")
 public class AddressEntity {
     private int id;
     private String userId;
@@ -84,37 +83,48 @@ public class AddressEntity {
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
-    
+
     @Basic
     @Column(name = "cityId", nullable = false)
     public int getCityId() {
-        return id;
+        return cityId;
     }
 
     public void setCityId(int cityId) {
         this.cityId = cityId;
     }
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         AddressEntity that = (AddressEntity) o;
-        return id == that.id &&
-                Objects.equals(userId, that.userId) &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(address, that.address) &&
-                Objects.equals(isTheMainAddress, that.isTheMainAddress) &&
-                Objects.equals(longitude, that.longitude) &&
-                Objects.equals(latitude, that.latitude) &&
-                Objects.equals(cityId, that.cityId);
+
+        if (id != that.id) return false;
+        if (cityId != that.cityId) return false;
+        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (address != null ? !address.equals(that.address) : that.address != null) return false;
+        if (isTheMainAddress != null ? !isTheMainAddress.equals(that.isTheMainAddress) : that.isTheMainAddress != null)
+            return false;
+        if (longitude != null ? !longitude.equals(that.longitude) : that.longitude != null) return false;
+        if (latitude != null ? !latitude.equals(that.latitude) : that.latitude != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, name, address, isTheMainAddress, longitude, latitude, cityId);
+        int result = id;
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (isTheMainAddress != null ? isTheMainAddress.hashCode() : 0);
+        result = 31 * result + (longitude != null ? longitude.hashCode() : 0);
+        result = 31 * result + (latitude != null ? latitude.hashCode() : 0);
+        result = 31 * result + cityId;
+        return result;
     }
 
     @Override
