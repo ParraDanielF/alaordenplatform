@@ -32,16 +32,21 @@ public class AuthController {
     public ResponseEntity<UserEntity> registrarUsuario(@RequestBody AccountEntity user){
         try {
             AccountEntity authResponse = accountService.validateCredentials(user);
+            
+            System.out.println(authResponse.getId());
             ServiceResponse response = new ServiceResponse();
-            
-            /** get the user info*/
-            UserEntity userData = userService.read(authResponse.getUserId());
-            
-            if (userData != null) {
-                return new ResponseEntity<>(userData, HttpStatus.OK);
-            }
-            else {
-                return new ResponseEntity<>(new UserEntity(), HttpStatus.NO_CONTENT);
+            if(authResponse.getId() != 0) {
+	            /** get the user info*/
+	            UserEntity userData = userService.read(authResponse.getUserId());
+	            
+	            if (userData != null) {
+	                return new ResponseEntity<>(userData, HttpStatus.OK);
+	            }
+	            else {
+	                return new ResponseEntity<>(new UserEntity(), HttpStatus.NO_CONTENT);
+	            }
+            }else {
+            	return new ResponseEntity<>(new UserEntity(), HttpStatus.NO_CONTENT);
             }
         }catch (Exception e){
         	e.printStackTrace();

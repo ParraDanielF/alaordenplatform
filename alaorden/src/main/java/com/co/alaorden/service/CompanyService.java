@@ -14,7 +14,13 @@ public class CompanyService {
     CompanyRepository companyRepository;
 
     public CompanyEntity create (CompanyEntity company){
-        return companyRepository.save(company);
+    	System.out.println(company.toString());
+    	try {
+    		return companyRepository.save(company);
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	return null;
     }
 
     public CompanyEntity read(Integer id){

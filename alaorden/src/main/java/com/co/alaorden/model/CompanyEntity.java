@@ -138,4 +138,13 @@ public class CompanyEntity {
     public int hashCode() {
         return Objects.hash(id, name, address, isActive, owner, segmentCode, longitude, latitude, country, city);
     }
+
+	@Override
+	public String toString() {
+		return "CompanyEntity [id=" + id + ", name=" + name + ", address=" + address + ", isActive=" + isActive
+				+ ", owner=" + owner + ", segmentCode=" + segmentCode + ", longitude=" + longitude + ", latitude="
+				+ latitude + ", country=" + country + ", city=" + city + "]";
+	}
+    
+    
 }

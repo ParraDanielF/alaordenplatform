@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.co.alaorden.model.CompanyCollaboratorsEntity;
@@ -28,8 +28,9 @@ public class CompanyController {
 	CompanyCollaboratorsService collaboratorService;
 	
     @RequestMapping (value = "/create-from-user/{userId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CompanyEntity> CreateCompanyFromUser(@RequestParam() String userId, @RequestBody CompanyEntity company){
+    public ResponseEntity<CompanyEntity> CreateCompanyFromUser(@PathVariable("userId") String userId, @RequestBody CompanyEntity company){
         try {
+        	System.out.println("A");
             company.setIsActive((byte) 1);
             company.setOwner(userId);
             
@@ -46,7 +47,7 @@ public class CompanyController {
     }
     
     @RequestMapping (value = "/{companyId}/add/{userId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> AddUserToACompany(@RequestParam() int companyId, @RequestParam() String userId){
+    public ResponseEntity<String> AddUserToACompany(@PathVariable("companyId") int companyId, @PathVariable("userId") String userId){
         try {
             
             CompanyCollaboratorsEntity collaborator = new CompanyCollaboratorsEntity();

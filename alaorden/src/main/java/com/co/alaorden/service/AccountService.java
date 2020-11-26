@@ -26,11 +26,10 @@ public class AccountService {
     	logger.info(account.getEmail() + " " + account.getPassword());
     	String email = account.getEmail();
     	AccountEntity accountData = accountRepository.findByEmail(email);
-    	System.out.println("[RESPONSE]");
     	logger.info("[RESPONSE]" + accountData.getPassword());
     	if(accountData != null) {
     		if(account.getPassword().equals(accountData.getPassword())) {
-    			return account;
+    			return accountData;
     		}else {
     			return new AccountEntity();
     		}
