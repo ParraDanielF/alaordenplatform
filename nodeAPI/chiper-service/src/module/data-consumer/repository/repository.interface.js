@@ -139,6 +139,14 @@ class RepositoryController {
         });
     }
 
+    getServicesByCompany(companyId) {
+        return new Promise((resolve, reject) => {
+            this._implementations.repositoryImplementation.getServicesByCompany(companyId)
+            .then(res => resolve(res))
+            .catch(err => reject(err))
+        });
+    }
+
 }
 
 module.exports = new RepositoryController();

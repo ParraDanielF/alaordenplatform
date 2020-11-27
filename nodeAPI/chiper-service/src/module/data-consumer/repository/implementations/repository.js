@@ -57,7 +57,7 @@ class RepositoryImplementationController {
 
     addUserToACompany(userId, companyId) {
         return new Promise((resolve, reject) => {
-            let collaborator = {userId, companyId};
+            let collaborator = { userId, companyId };
             connection.query('INSERT INTO company_collaborators SET ?', collaborator, function (error, results, fields) {
                 if (error) reject(error);
                 resolve();
@@ -101,7 +101,7 @@ class RepositoryImplementationController {
         });
     }
 
-    getNotificationsByUser(userId){
+    getNotificationsByUser(userId) {
         return new Promise((resolve, reject) => {
             connection.query(`SELECT * FROM Notifications WHERE userId = ${userId}`, function (error, results, fields) {
                 if (error) reject(error);
@@ -125,22 +125,31 @@ class RepositoryImplementationController {
                 , [servicesArray.map(item => [item.companyId, item.serviceType, item.name, item.description, item.price, item.isNegotiable, item.score])]
                 , function (error, results, fields) {
                     if (error) reject(error);
-                    // Neat!
+                    resolve();
                 });
         });
     }
 
     searchServices(type, city, date) {
         return new Promise((resolve, reject) => {
-            connection.query("SELECT s.* FROM Service s "
+            connection.query("SELECT s.*, cp.* FROM Service s "
                 + " JOIN Company cp ON s.companyId = cp.id"
                 + " JOIN City ct ON ct.id = cp.city"
-                + `WHERE s.serviceType = ${type}`
-                + `AND ct.id = ${city}`
-                + `AND NOT EXISTS (SELECT * FROM Contract WHERE contractDate = ${date})`, function (error, results, fields) {
+                + ` WHERE s.serviceType = ${type}`
+                + ` AND ct.id = ${city}`
+                + ` AND cp.id not in (SELECT companyId FROM Contract WHERE contractDate = '${date}' AND state != 'C')`, function (error, results, fields) {
                     if (error) reject(error);
-                    // Neat!
+                    resolve(results);
                 });
+        });
+    }
+
+    getServicesByCompany(companyId) {
+        return new Promise((resolve, reject) => {
+            connection.query(`SELECT * FROM Service WHERE companyId = '${companyId}'`, function (error, results, fields) {
+                if (error) reject(error);
+                resolve(results)
+            });
         });
     }
 

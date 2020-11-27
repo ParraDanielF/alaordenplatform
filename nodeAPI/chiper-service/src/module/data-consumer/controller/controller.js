@@ -33,7 +33,7 @@ class MainController {
     }
 
     getUserAddresses(req, res) {
-        const {userId} = req.params;
+        const { userId } = req.params;
         this._serviceController.getUserAddresses(userId)
             .then(response => res.status(200).send(response))
             .catch(err => {
@@ -55,7 +55,7 @@ class MainController {
 
     addUserToACompany(req, res) {
 
-        const {userId, companyId} = req.params;
+        const { userId, companyId } = req.params;
         this._serviceController.addUserToACompany(userId, companyId)
             .then(response => res.status(200).send(response))
             .catch(err => {
@@ -106,7 +106,9 @@ class MainController {
     }
 
     registerCompanyServices(req, res) {
-        this._serviceController.registerCompanyServices()
+
+        const { companyId } = req.params;
+        this._serviceController.registerCompanyServices(companyId, req.body)
             .then(response => res.status(200).send(response))
             .catch(err => {
                 let serviceResponse = this.buildError(err);
@@ -116,13 +118,23 @@ class MainController {
     }
 
     searchServices(req, res) {
-        this._serviceController.searchServices()
+        this._serviceController.searchServices(req.body)
             .then(response => res.status(200).send(response))
             .catch(err => {
                 let serviceResponse = this.buildError(err);
                 res.status(400).send(serviceResponse)
             });
+    }
 
+
+    getServicesByCompany(req, res) {
+        const { companyId } = req.params;
+        this._serviceController.getServicesByCompany(companyId)
+            .then(response => res.status(200).send(response))
+            .catch(err => {
+                let serviceResponse = this.buildError(err);
+                res.status(400).send(serviceResponse)
+            });
     }
 
     registerUser(req, res) {

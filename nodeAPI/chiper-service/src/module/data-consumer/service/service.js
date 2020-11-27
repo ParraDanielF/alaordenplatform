@@ -149,8 +149,11 @@ class ServiceController {
         });
     }
 
-    registerCompanyServices(servicesArray) {
+    registerCompanyServices(companyId, servicesArray) {
         return new Promise((resolve, reject) => {
+            servicesArray.forEach( svc => {
+                svc['companyId'] = companyId;
+            });
             this._repositoryController.registerCompanyServices(servicesArray)
                 .then(() => {
                     resolve({
@@ -168,6 +171,16 @@ class ServiceController {
                     resolve(res);
                 })
                 .catch(err => reject(err))
+        });
+    }
+
+    getServicesByCompany(companyId) {
+        return new Promise((resolve, reject) => {
+            this._repositoryController.getServicesByCompany(companyId)
+            .then( services => {
+                resolve(services);
+            })
+            .catch(err => reject(err))
         });
     }
 
