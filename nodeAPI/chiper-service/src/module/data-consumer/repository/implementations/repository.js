@@ -153,20 +153,36 @@ class RepositoryImplementationController {
         });
     }
 
-    registerUser(userData) {
+    async registerUser(userData) {
         return new Promise((resolve, reject) => {
             connection.query('INSERT INTO User SET ?', userData, function (error, results, fields) {
                 if (error) reject(error);
-                // Neat!
+                resolve({
+                    message : 'user created'
+                })
+            });
+        });
+    }
+
+    getUser(userDoc) {
+        return new Promise((resolve, reject) => {
+            connection.query(`SELECT * FROM User WHERE document = '${userDoc}'`, function (error, results, fields) {
+                if (error) reject(error);
+
+                console.log(results)
+                resolve(results)
             });
         });
     }
 
     registerUserAccount(accountData) {
         return new Promise((resolve, reject) => {
+            console.log(accountData)
             connection.query('INSERT INTO Account SET ?', accountData, function (error, results, fields) {
                 if (error) reject(error);
-                // Neat!
+                resolve({
+                    message : 'account created'
+                })
             });
         });
     }

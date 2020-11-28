@@ -26,6 +26,10 @@ class ServiceController {
                                 message: false
                             })
                         }
+                    } else {
+                        reject({
+                            message: 'the user doesn\' exists'
+                        })
                     }
                 })
                 .catch(err => reject(err))
@@ -151,7 +155,7 @@ class ServiceController {
 
     registerCompanyServices(companyId, servicesArray) {
         return new Promise((resolve, reject) => {
-            servicesArray.forEach( svc => {
+            servicesArray.forEach(svc => {
                 svc['companyId'] = companyId;
             });
             this._repositoryController.registerCompanyServices(servicesArray)
@@ -177,37 +181,46 @@ class ServiceController {
     getServicesByCompany(companyId) {
         return new Promise((resolve, reject) => {
             this._repositoryController.getServicesByCompany(companyId)
-            .then( services => {
-                resolve(services);
-            })
-            .catch(err => reject(err))
+                .then(services => {
+                    resolve(services);
+                })
+                .catch(err => reject(err))
         });
     }
 
     registerUser(user) {
-        return new Promise((resolve, reject) => {
-            let userData = {
-                name: user.name,
-                document: user.document,
-                documentType: user.documentType,
-                lastName: user.lastName,
-                country: user.country || 1,
-                city: user.city || 1
-            }
-            this._repositoryController.registerUser(userData)
-                .then(async (newUser) => {
-                    /** create account data */
-                    let accountData = {
-                        userId: newUser.id,
-                        email: user.email,
-                        roleId: 1,
-                        password: user.password,
-                        status: 1
-                    };
+        return new Promise(async (resolve, reject) => {
+            try {
+                let userData = {
+                    id: 0,
+                    name: user.name,
+                    document: user.document,
+                    documentType: user.documentType,
+                    lastName: user.lastName,
+                    country: user.country || 1,
+                    city: user.city || 1
+                }
+                await this._repositoryController.registerUser(userData)
 
-                    await this._repositoryController.registerUserAccount(accountData);
-                })
-                .catch(err => reject(err))
+                let newUser = await this._repositoryController.getUser(user.document)[0];
+                console.log('1=>', newUser)
+                /** create account data */
+                let accountData = {
+                    id: 0,
+                    userId: newUser.id,
+                    email: user.email,
+                    roleId: 1,
+                    password: user.password,
+                    status: 1
+                };
+
+                let accountResponse = await this._repositoryController.registerUserAccount(accountData);
+                resolve(accountResponse)
+            } catch (error) {
+                reject(error);
+            }
+
+
         });
     }
 

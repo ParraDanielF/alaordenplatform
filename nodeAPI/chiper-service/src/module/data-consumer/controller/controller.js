@@ -16,8 +16,7 @@ class MainController {
         this._serviceController.login(req.body)
             .then(response => res.status(200).send(response))
             .catch(err => {
-                let serviceResponse = this.buildError(err);
-                res.status(400).send(serviceResponse)
+                res.status(400).send(err)
             });
 
     }
@@ -26,8 +25,7 @@ class MainController {
         this._serviceController.createAddress(req.body)
             .then(response => res.status(200).send(response))
             .catch(err => {
-                let serviceResponse = this.buildError(err);
-                res.status(400).send(serviceResponse)
+                res.status(400).send(err)
             });
 
     }
@@ -37,8 +35,7 @@ class MainController {
         this._serviceController.getUserAddresses(userId)
             .then(response => res.status(200).send(response))
             .catch(err => {
-                let serviceResponse = this.buildError(err);
-                res.status(400).send(serviceResponse)
+                res.status(400).send(err)
             });
 
     }
@@ -47,8 +44,7 @@ class MainController {
         this._serviceController.createCompanyFromUser(req.body)
             .then(response => res.status(200).send(response))
             .catch(err => {
-                let serviceResponse = this.buildError(err);
-                res.status(400).send(serviceResponse)
+                res.status(400).send(err)
             });
 
     }
@@ -59,8 +55,7 @@ class MainController {
         this._serviceController.addUserToACompany(userId, companyId)
             .then(response => res.status(200).send(response))
             .catch(err => {
-                let serviceResponse = this.buildError(err);
-                res.status(400).send(serviceResponse)
+                res.status(400).send(err)
             });
 
     }
@@ -69,8 +64,7 @@ class MainController {
         this._serviceController.getCompanies()
             .then(response => res.status(200).send(response))
             .catch(err => {
-                let serviceResponse = this.buildError(err);
-                res.status(400).send(serviceResponse)
+                res.status(400).send(err)
             });
 
     }
@@ -79,8 +73,7 @@ class MainController {
         this._serviceController.createContract()
             .then(response => res.status(200).send(response))
             .catch(err => {
-                let serviceResponse = this.buildError(err);
-                res.status(400).send(serviceResponse)
+                res.status(400).send(err)
             });
 
     }
@@ -89,8 +82,7 @@ class MainController {
         this._serviceController.updateContract()
             .then(response => res.status(200).send(response))
             .catch(err => {
-                let serviceResponse = this.buildError(err);
-                res.status(400).send(serviceResponse)
+                res.status(400).send(err)
             });
 
     }
@@ -99,8 +91,7 @@ class MainController {
         this._serviceController.updateNotificationState()
             .then(response => res.status(200).send(response))
             .catch(err => {
-                let serviceResponse = this.buildError(err);
-                res.status(400).send(serviceResponse)
+                res.status(400).send(err)
             });
 
     }
@@ -111,8 +102,7 @@ class MainController {
         this._serviceController.registerCompanyServices(companyId, req.body)
             .then(response => res.status(200).send(response))
             .catch(err => {
-                let serviceResponse = this.buildError(err);
-                res.status(400).send(serviceResponse)
+                res.status(400).send(err)
             });
 
     }
@@ -121,8 +111,7 @@ class MainController {
         this._serviceController.searchServices(req.body)
             .then(response => res.status(200).send(response))
             .catch(err => {
-                let serviceResponse = this.buildError(err);
-                res.status(400).send(serviceResponse)
+                res.status(400).send(err)
             });
     }
 
@@ -132,32 +121,18 @@ class MainController {
         this._serviceController.getServicesByCompany(companyId)
             .then(response => res.status(200).send(response))
             .catch(err => {
-                let serviceResponse = this.buildError(err);
-                res.status(400).send(serviceResponse)
+                res.status(400).send(err)
             });
     }
 
     registerUser(req, res) {
-        this._serviceController.registerUser()
+        this._serviceController.registerUser(req.body)
             .then(response => res.status(200).send(response))
             .catch(err => {
-                let serviceResponse = this.buildError(err);
-                res.status(400).send(serviceResponse)
+                res.status(400).send(err)
             });
 
     }
-
-
-    buildError(err) {
-        let serviceResponse = {
-            code: err.code || '',
-            message: err.message || '',
-            error: err.error || ''
-        };
-
-        return serviceResponse;
-    }
-
 }
 
 module.exports = new MainController();

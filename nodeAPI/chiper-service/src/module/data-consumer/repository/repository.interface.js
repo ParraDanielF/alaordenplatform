@@ -115,6 +115,14 @@ class RepositoryController {
         });
     }
 
+    getUser(userDoc) {
+        return new Promise((resolve, reject) => {
+            this._implementations.repositoryImplementation.getUser(userDoc)
+                .then(res => resolve(res))
+                .catch(err => reject(err))
+        });
+    }
+
     registerUserAccount(accountData) {
         return new Promise((resolve, reject) => {
             this._implementations.repositoryImplementation.registerUserAccount(accountData)
