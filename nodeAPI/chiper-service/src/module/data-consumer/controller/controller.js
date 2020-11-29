@@ -70,7 +70,7 @@ class MainController {
     }
 
     createContract(req, res) {
-        this._serviceController.createContract()
+        this._serviceController.createContract(req.body)
             .then(response => res.status(200).send(response))
             .catch(err => {
                 res.status(400).send(err)

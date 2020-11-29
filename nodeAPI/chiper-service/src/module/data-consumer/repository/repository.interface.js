@@ -83,6 +83,14 @@ class RepositoryController {
         });
     }
 
+    getContract(companyId, userId) {
+        return new Promise((resolve, reject) => {
+            this._implementations.repositoryImplementation.getContract(companyId, userId)
+                .then(res => resolve(res))
+                .catch(err => reject(err))
+        });
+    }
+
     updateContract(contractId, newContractStatus) {
         return new Promise((resolve, reject) => {
             this._implementations.repositoryImplementation.updateContract(contractId, newContractStatus)
@@ -94,6 +102,14 @@ class RepositoryController {
     createNotification(notification) {
         return new Promise((resolve, reject) => {
             this._implementations.repositoryImplementation.createNotification(notification)
+                .then(res => resolve(res))
+                .catch(err => reject(err))
+        });
+    }
+
+    getcontratedService(serviceId) {
+        return new Promise((resolve, reject) => {
+            this._implementations.repositoryImplementation.getcontratedService(serviceId)
                 .then(res => resolve(res))
                 .catch(err => reject(err))
         });

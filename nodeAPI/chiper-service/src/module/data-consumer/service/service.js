@@ -109,31 +109,53 @@ class ServiceController {
 
     createContract(contractData) {
         return new Promise((resolve, reject) => {
-            this._repositoryController.createContract(contractData)
-                .then(async (newContract) => {
+            let contract = {
+                companyId: contractData.companyId,
+                userId: contractData.userId,
+                contractDate: contractData.date,
+                paymentTypeId: contractData.paymentType,
+                state: contractData.state
+            };
 
-                    /** register contract services */
-                    contractData.services.forEach(svc => {
-                        svc['contractId'] = newContract['id'];
-                    })
+            this._repositoryController.createContract(contract)
+                .then(() => {
+                    this._repositoryController.getContract(contract.companyId, contract.userId).then(async data => {
+                        /** register contract services */
+                        contractData.services.forEach(svc => {
+                            svc['contractId'] = data[0]['id'];
+                        })
+                        await this._repositoryController.registerContractServices(contractData.services);
 
-                    await this._repositoryController.registerContractServices(contractData.services);
-                    /** register notification, (user, companyId) */
-                    let notificationBody = {
-                        notificationMessage: '',
-                        readStatus: 0,
-                        userId: contractData.userId
-                    };
+                        /** register notification, (user, companyId) */
+                        let notificationsBodies = [{
+                            notificationMessage: `Se ha solicitado el servicio exitosamente`,
+                            readStatus: 0,
+                            userId: contractData.userId
+                        },
+                        {
+                            readStatus: 0,
+                            userId: contractData.companyOwner,
+                        }
+                        ];
 
-                    await this._repositoryController.createNotification(notificationBody);
-                    resolve({
-                        message: 'Success'
-                    })
-                })
-                .catch(err => reject(err))
+                        notificationsBodies.forEach(async (notificationBody) => {
+                            if (!notificationBody.notificationMessage) {
+                                let data = await this._repositoryController.getcontratedService(contractData.services[0]['serviceId']);
+                                notificationBody['notificationMessage'] = `Ha recibido una solicitud del servicio ${data[0].name} el dia ${contractData.date}`
+                            }
+
+                            await this._repositoryController.createNotification(notificationBody)
+                        });
+
+                        resolve({
+                            message: 'Success'
+                        })
+
+                    }).catch(err => reject(err))
+
+                }).catch(err => reject(err))
         });
     }
-
     updateContract(contractId, newContractStatus) {
         return new Promise((resolve, reject) => {
             this._repositoryController.updateContract(contractId, newContractStatus)

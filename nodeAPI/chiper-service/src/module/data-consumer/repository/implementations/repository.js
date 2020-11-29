@@ -49,7 +49,6 @@ class RepositoryImplementationController {
     createCompanyFromUser(companyData) {
         return new Promise((resolve, reject) => {
 
-            console.log(companyData)
             connection.query('INSERT INTO Company SET ?', companyData, function (error, results, fields) {
                 if (error) {reject(error);}
                 resolve();
@@ -94,11 +93,20 @@ class RepositoryImplementationController {
         });
     }
 
-    createContract() {
+    createContract(contract) {
         return new Promise((resolve, reject) => {
-            connection.query('INSERT INTO Contract SET ?', post, function (error, results, fields) {
+            connection.query('INSERT INTO Contract SET ?', contract, function (error, results, fields) {
                 if (error) reject(error);
-                // Neat!
+                resolve();
+            });
+        });
+    }
+
+    getContract(companyId, userId) {
+        return new Promise((resolve, reject) => {
+            connection.query(`SELECT * FROM Contract WHERE companyId = ${companyId} AND userId = ${userId} ORDER BY contractDate DESC LIMIT 1`, function (error, results, fields) {
+                if (error) reject(error);
+                resolve(results);
             });
         });
     }
@@ -107,25 +115,35 @@ class RepositoryImplementationController {
         return new Promise((resolve, reject) => {
             connection.query(`UPDATE Contract SET state = ${newState} WHERE id = ${contractId}`, function (error, results, fields) {
                 if (error) reject(error);
-                // Neat!
+                resolve();
             });
         });
     }
 
     createNotification(notification) {
         return new Promise((resolve, reject) => {
-            connection.query('INSERT INTO Contract SET ?', notification, function (error, results, fields) {
+            connection.query('INSERT INTO Notifications SET ?', notification, function (error, results, fields) {
                 if (error) reject(error);
-                // Neat!
+                resolve();
             });
         });
     }
+
+    getcontratedService(serviceId) {
+        return new Promise((resolve, reject) => {
+            connection.query(`SELECT * FROM Service WHERE id = ${serviceId}` , function (error, results, fields) {
+                if (error) reject(error);
+                resolve(results);
+            });
+        });
+    }
+
 
     getNotificationsByUser(userId) {
         return new Promise((resolve, reject) => {
             connection.query(`SELECT * FROM Notifications WHERE userId = ${userId}`, function (error, results, fields) {
                 if (error) reject(error);
-                // Neat!
+                resolve(results);
             });
         });
     }
@@ -134,7 +152,7 @@ class RepositoryImplementationController {
         return new Promise((resolve, reject) => {
             connection.query(`UPDATE Contract SET readStatus = ${newState} WHERE id = ${notificationId}`, function (error, results, fields) {
                 if (error) reject(error);
-                // Neat!
+                resolve();
             });
         });
     }
@@ -152,7 +170,7 @@ class RepositoryImplementationController {
 
     searchServices(type, city, date) {
         return new Promise((resolve, reject) => {
-            connection.query("SELECT s.*, cp.* FROM Service s "
+            connection.query("SELECT s.id as serviceId, s.*, cp.* FROM Service s "
                 + " JOIN Company cp ON s.companyId = cp.id"
                 + " JOIN City ct ON ct.id = cp.city"
                 + ` WHERE s.serviceType = ${type}`
@@ -188,8 +206,6 @@ class RepositoryImplementationController {
         return new Promise((resolve, reject) => {
             connection.query(`SELECT * FROM User WHERE document = '${userDoc}'`, function (error, results, fields) {
                 if (error) reject(error);
-
-                console.log(results)
                 resolve(results)
             });
         });
@@ -197,7 +213,6 @@ class RepositoryImplementationController {
 
     registerUserAccount(accountData) {
         return new Promise((resolve, reject) => {
-            console.log(accountData)
             connection.query('INSERT INTO Account SET ?', accountData, function (error, results, fields) {
                 if (error) reject(error);
                 resolve({
@@ -213,7 +228,7 @@ class RepositoryImplementationController {
                 , [contractServices.map(item => [item['contractId'], item['serviceId']])]
                 , function (error, results, fields) {
                     if (error) reject(error);
-                    // Neat!
+                    resolve();
                 });
         });
     }
