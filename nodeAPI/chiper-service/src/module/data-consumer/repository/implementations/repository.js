@@ -67,7 +67,7 @@ class RepositoryImplementationController {
 
     getCompanies() {
         return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM Company', function (error, results, fields) {
+            connection.query('SELECT cp.*, cp.address as location,ct.name as city FROM Company cp JOIN City ct ON cp.city = ct.id', function (error, results, fields) {
                 if (error) reject(error);
                 resolve(results);
             });

@@ -19,7 +19,8 @@ class ServiceController {
                         if (res[0]['password'] == credentials['password']) {
                             resolve({
                                 message: true,
-                                role: res[0]['roleId']
+                                role: res[0]['roleId'],
+                                userId : res[0]['userId']
                             });
                         } else {
                             reject({
@@ -189,7 +190,7 @@ class ServiceController {
     }
 
     registerUser(user) {
-        return new Promise(async (resolve, reject) => {
+        return new Promise((resolve, reject) => {
             try {
                 let userData = {
                     id: 0,
@@ -200,22 +201,26 @@ class ServiceController {
                     country: user.country || 1,
                     city: user.city || 1
                 }
-                await this._repositoryController.registerUser(userData)
+                console.log("1");
+                let promises = [this._repositoryController.registerUser(userData)]
+                console.log("2");
+                Promise.all(promises).then(() => {
+                    this._repositoryController.getUser(user.document)[0].then(async(newUser) => {
+                        console.log('1=>', newUser)
+                        /** create account data */
+                        let accountData = {
+                            id: 0,
+                            userId: newUser.id,
+                            email: user.email,
+                            roleId: 1,
+                            password: user.password,
+                            status: 1
+                        };
 
-                let newUser = await this._repositoryController.getUser(user.document)[0];
-                console.log('1=>', newUser)
-                /** create account data */
-                let accountData = {
-                    id: 0,
-                    userId: newUser.id,
-                    email: user.email,
-                    roleId: 1,
-                    password: user.password,
-                    status: 1
-                };
-
-                let accountResponse = await this._repositoryController.registerUserAccount(accountData);
-                resolve(accountResponse)
+                        let accountResponse = await this._repositoryController.registerUserAccount(accountData);
+                        resolve(accountResponse)
+                    });
+                })
             } catch (error) {
                 reject(error);
             }
