@@ -66,6 +66,15 @@ class RepositoryImplementationController {
         });
     }
 
+    updateAccountRole(userId, role){
+        return new Promise((resolve, reject) => {
+            connection.query(`UPDATE Account SET roleId = ${role} WHERE userId = '${userId}'`, function (error, results, fields) {
+                if (error) reject(error);
+                resolve();
+            });
+        });
+    }
+
     addUserToACompany(userId, companyId) {
         return new Promise((resolve, reject) => {
             let collaborator = { userId, companyId };

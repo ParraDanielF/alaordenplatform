@@ -63,11 +63,13 @@ class ServiceController {
         return new Promise((resolve, reject) => {
             this._repositoryController.createCompanyFromUser(userData)
                 .then(() => {
-                    console.log("check")
-                    this._repositoryController.getCompanyByName(userData.name).then( data => {
-                        resolve(data[0])
+                    this._repositoryController.updateAccountRole(userData.owner, 2).then(() => {
+                        this._repositoryController.getCompanyByName(userData.name).then(data => {
+                            resolve(data[0])
+                        })
+                            .catch(err => reject(err))
                     })
-                    .catch(err => reject(err))
+                        .catch(err => reject(err))
                 })
                 .catch(err => reject(err))
         });
