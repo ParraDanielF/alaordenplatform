@@ -113,7 +113,7 @@ class RepositoryImplementationController {
 
     updateContract(contractId, newState) {
         return new Promise((resolve, reject) => {
-            connection.query(`UPDATE Contract SET state = ${newState} WHERE id = ${contractId}`, function (error, results, fields) {
+            connection.query(`UPDATE Contract SET state = '${newState}' WHERE id = ${contractId}`, function (error, results, fields) {
                 if (error) reject(error);
                 resolve();
             });
@@ -159,7 +159,7 @@ class RepositoryImplementationController {
 
     getNotificationsByUser(userId){
         return new Promise((resolve, reject) => {
-            connection.query(`SELECT * FROM Notifications WHERE userId = '${userId}'`, function (error, results, fields) {
+            connection.query(`SELECT * FROM Notifications WHERE userId = '${userId}' AND readStatus = 0`, function (error, results, fields) {
                 if (error) reject(error);
                 resolve(results);
             });
@@ -202,7 +202,7 @@ class RepositoryImplementationController {
 
     getContractDataToSeller(contractId) {
         return new Promise((resolve, reject) => {
-            connection.query(`SELECT s.name as serviceName, c.contractDate, ct.name as cityName FROM contract_services cs
+            connection.query(`SELECT s.name as serviceName, c.contractDate, c.description, ct.name as cityName FROM contract_services cs
             JOIN contract c ON cs.contractId = c.id
             JOIN service s ON cs.serviceId = s.id
             JOIN company cp ON s.companyId = cp.id

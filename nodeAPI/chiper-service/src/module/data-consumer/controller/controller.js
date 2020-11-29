@@ -132,10 +132,18 @@ class MainController {
             });
     }
 
+    SetDecision(req, res) {
+        this._serviceController.setDecision(req.body)
+            .then(response => res.status(200).send(response))
+            .catch(err => {
+                res.status(400).send(err)
+            });
+    }
+
     getContractDataToSeller(req, res) {
         const { contractId } = req.params;
         this._serviceController.getContractDataToSeller(contractId)
-            .then(response => {console.log(response); res.status(200).send(response)})
+            .then(response => res.status(200).send(response))
             .catch(err => {
                 res.status(400).send(err)
             });

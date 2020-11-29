@@ -24,6 +24,8 @@ router.post('/service/register/:companyId', MainController.registerCompanyServic
 router.post('/service/search', MainController.searchServices.bind(MainController));
 router.get('/service/:contractId/data', MainController.getContractDataToSeller.bind(MainController));
 router.get('/:companyId/services', MainController.getServicesByCompany.bind(MainController));
+router.post('/service/decision', MainController.SetDecision.bind(MainController));
+
 
 /** contract */
 router.post('/contract/create', MainController.createContract.bind(MainController));

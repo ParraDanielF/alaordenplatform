@@ -115,7 +115,7 @@ class ServiceController {
                 contractDate: contractData.date,
                 paymentTypeId: contractData.paymentType,
                 state: contractData.state,
-                description : contractData.description
+                description: contractData.description
             };
 
             this._repositoryController.createContract(contract)
@@ -132,12 +132,12 @@ class ServiceController {
                             notificationMessage: `Se ha solicitado el servicio exitosamente`,
                             readStatus: 0,
                             userId: contractData.userId,
-                            contractId : data[0]['id']
+                            contractId: data[0]['id']
                         },
                         {
                             readStatus: 0,
                             userId: contractData.companyOwner,
-                            contractId : data[0]['id']
+                            contractId: data[0]['id']
                         }
                         ];
 
@@ -223,6 +223,20 @@ class ServiceController {
             this._repositoryController.getServicesByCompany(companyId)
                 .then(services => {
                     resolve(services);
+                })
+                .catch(err => reject(err))
+        });
+    }
+
+    setDecision(decision) {
+        return new Promise((resolve, reject) => {
+            let d = decision.decision == "Accept" ? "A" : "R";
+            this.updateContract(decision.contractId, d)
+                .then(services => {
+                    this.updateNotificationState(decision.notificationId,1).then( data => {
+                        resolve();
+                    })
+                    .catch(err => reject(err))
                 })
                 .catch(err => reject(err))
         });

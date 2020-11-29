@@ -5,3 +5,7 @@ INSERT INTO City VALUES(0,'BOGOTA'),(0,'MEDELLIN');
 INSERT INTO Country VALUES(0,'COLOMBIA');
 
 INSERT INTO documenttype VALUES(0,'CEDULA DE CIUDADANIA');
+
+INSERT INTO paymenttype VALUES(0,'Efectivo'),(0, 'Tarjeta de credito'),(0, 'PSE');
+
+INSERT INTO role VALUES (0, 'client', 'general client'),(0, 'seller', 'a client with a registered company');
