@@ -22,6 +22,7 @@ router.get('/company/list', MainController.getCompanies.bind(MainController));
 /** services */
 router.post('/service/register/:companyId', MainController.registerCompanyServices.bind(MainController));
 router.post('/service/search', MainController.searchServices.bind(MainController));
+router.get('/service/:contractId/data', MainController.getContractDataToSeller.bind(MainController));
 router.get('/:companyId/services', MainController.getServicesByCompany.bind(MainController));
 
 /** contract */
@@ -29,6 +30,7 @@ router.post('/contract/create', MainController.createContract.bind(MainControlle
 router.put('/contract/update', MainController.updateContract.bind(MainController));
 
 /** notification */
+router.get('/:userId/notifications', MainController.getNotificationsByUser.bind(MainController));
 router.post('/notification/:notificationId/state/:state', MainController.updateNotificationState.bind(MainController));
 
 /** user */

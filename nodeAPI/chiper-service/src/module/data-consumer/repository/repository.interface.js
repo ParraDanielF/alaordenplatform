@@ -123,6 +123,14 @@ class RepositoryController {
         });
     }
 
+    getNotificationsByUser(userId) {
+        return new Promise((resolve, reject) => {
+            this._implementations.repositoryImplementation.getNotificationsByUser(userId)
+                .then(res => resolve(res))
+                .catch(err => reject(err))
+        });
+    }
+
     registerCompanyServices(servicesArray) {
         return new Promise((resolve, reject) => {
             this._implementations.repositoryImplementation.registerCompanyServices(servicesArray)
@@ -182,6 +190,14 @@ class RepositoryController {
     getServicesByCompany(companyId) {
         return new Promise((resolve, reject) => {
             this._implementations.repositoryImplementation.getServicesByCompany(companyId)
+            .then(res => resolve(res))
+            .catch(err => reject(err))
+        });
+    }
+
+    getContractDataToSeller(contractId) {
+        return new Promise((resolve, reject) => {
+            this._implementations.repositoryImplementation.getContractDataToSeller(contractId)
             .then(res => resolve(res))
             .catch(err => reject(err))
         });

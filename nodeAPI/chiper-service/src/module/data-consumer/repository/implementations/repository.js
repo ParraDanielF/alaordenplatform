@@ -141,7 +141,7 @@ class RepositoryImplementationController {
 
     getNotificationsByUser(userId) {
         return new Promise((resolve, reject) => {
-            connection.query(`SELECT * FROM Notifications WHERE userId = ${userId}`, function (error, results, fields) {
+            connection.query(`SELECT * FROM Notifications WHERE userId = '${userId}'`, function (error, results, fields) {
                 if (error) reject(error);
                 resolve(results);
             });
@@ -150,9 +150,18 @@ class RepositoryImplementationController {
 
     updateNotificationState(notificationId, newState) {
         return new Promise((resolve, reject) => {
-            connection.query(`UPDATE Contract SET readStatus = ${newState} WHERE id = ${notificationId}`, function (error, results, fields) {
+            connection.query(`UPDATE Notifications SET readStatus = ${newState} WHERE id = ${notificationId}`, function (error, results, fields) {
                 if (error) reject(error);
                 resolve();
+            });
+        });
+    }
+
+    getNotificationsByUser(userId){
+        return new Promise((resolve, reject) => {
+            connection.query(`SELECT * FROM Notifications WHERE userId = '${userId}'`, function (error, results, fields) {
+                if (error) reject(error);
+                resolve(results);
             });
         });
     }
@@ -187,6 +196,20 @@ class RepositoryImplementationController {
             connection.query(`SELECT * FROM Service WHERE companyId = '${companyId}'`, function (error, results, fields) {
                 if (error) reject(error);
                 resolve(results)
+            });
+        });
+    }
+
+    getContractDataToSeller(contractId) {
+        return new Promise((resolve, reject) => {
+            connection.query(`SELECT s.name as serviceName, c.contractDate, ct.name as cityName FROM contract_services cs
+            JOIN contract c ON cs.contractId = c.id
+            JOIN service s ON cs.serviceId = s.id
+            JOIN company cp ON s.companyId = cp.id
+            JOIN city ct ON cp.city = ct.id
+            where c.id = '${contractId}'`, function (error, results, fields) {
+                if (error) reject(error);
+                resolve(results[0])
             });
         });
     }

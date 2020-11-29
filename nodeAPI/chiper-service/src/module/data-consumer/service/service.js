@@ -114,7 +114,8 @@ class ServiceController {
                 userId: contractData.userId,
                 contractDate: contractData.date,
                 paymentTypeId: contractData.paymentType,
-                state: contractData.state
+                state: contractData.state,
+                description : contractData.description
             };
 
             this._repositoryController.createContract(contract)
@@ -130,11 +131,13 @@ class ServiceController {
                         let notificationsBodies = [{
                             notificationMessage: `Se ha solicitado el servicio exitosamente`,
                             readStatus: 0,
-                            userId: contractData.userId
+                            userId: contractData.userId,
+                            contractId : data[0]['id']
                         },
                         {
                             readStatus: 0,
                             userId: contractData.companyOwner,
+                            contractId : data[0]['id']
                         }
                         ];
 
@@ -180,6 +183,16 @@ class ServiceController {
         });
     }
 
+    getNotificationsByUser(userId) {
+        return new Promise((resolve, reject) => {
+            this._repositoryController.getNotificationsByUser(userId)
+                .then(data => {
+                    resolve(data)
+                })
+                .catch(err => reject(err))
+        });
+    }
+
     registerCompanyServices(companyId, servicesArray) {
         return new Promise((resolve, reject) => {
             servicesArray.forEach(svc => {
@@ -208,6 +221,16 @@ class ServiceController {
     getServicesByCompany(companyId) {
         return new Promise((resolve, reject) => {
             this._repositoryController.getServicesByCompany(companyId)
+                .then(services => {
+                    resolve(services);
+                })
+                .catch(err => reject(err))
+        });
+    }
+
+    getContractDataToSeller(contractId) {
+        return new Promise((resolve, reject) => {
+            this._repositoryController.getContractDataToSeller(contractId)
                 .then(services => {
                     resolve(services);
                 })

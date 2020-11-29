@@ -93,7 +93,14 @@ class MainController {
             .catch(err => {
                 res.status(400).send(err)
             });
+    }
 
+    getNotificationsByUser(req, res) {
+        this._serviceController.getNotificationsByUser(req.params.userId)
+            .then(response => res.status(200).send(response))
+            .catch(err => {
+                res.status(400).send(err)
+            });
     }
 
     registerCompanyServices(req, res) {
@@ -120,6 +127,15 @@ class MainController {
         const { companyId } = req.params;
         this._serviceController.getServicesByCompany(companyId)
             .then(response => res.status(200).send(response))
+            .catch(err => {
+                res.status(400).send(err)
+            });
+    }
+
+    getContractDataToSeller(req, res) {
+        const { contractId } = req.params;
+        this._serviceController.getContractDataToSeller(contractId)
+            .then(response => {console.log(response); res.status(200).send(response)})
             .catch(err => {
                 res.status(400).send(err)
             });
