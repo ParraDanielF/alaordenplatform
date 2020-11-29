@@ -20,7 +20,7 @@ class ServiceController {
                             resolve({
                                 message: true,
                                 role: res[0]['roleId'],
-                                userId : res[0]['userId']
+                                userId: res[0]['userId']
                             });
                         } else {
                             reject({
@@ -63,9 +63,11 @@ class ServiceController {
         return new Promise((resolve, reject) => {
             this._repositoryController.createCompanyFromUser(userData)
                 .then(() => {
-                    resolve({
-                        message: 'Success'
+                    console.log("check")
+                    this._repositoryController.getCompanyByName(userData.name).then( data => {
+                        resolve(data[0])
                     })
+                    .catch(err => reject(err))
                 })
                 .catch(err => reject(err))
         });
@@ -205,7 +207,7 @@ class ServiceController {
                 let promises = [this._repositoryController.registerUser(userData)]
                 console.log("2");
                 Promise.all(promises).then(() => {
-                    this._repositoryController.getUser(user.document)[0].then(async(newUser) => {
+                    this._repositoryController.getUser(user.document)[0].then(async (newUser) => {
                         console.log('1=>', newUser)
                         /** create account data */
                         let accountData = {

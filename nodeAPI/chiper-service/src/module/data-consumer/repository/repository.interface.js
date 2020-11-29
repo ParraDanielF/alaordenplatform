@@ -43,6 +43,14 @@ class RepositoryController {
         });
     }
 
+    getCompanyByName(companyName) {
+        return new Promise((resolve, reject) => {
+            this._implementations.repositoryImplementation.getCompanyByName(companyName)
+                .then(res => resolve(res))
+                .catch(err => reject(err))
+        });
+    }
+
     addUserToACompany(userId, companyId) {
         return new Promise((resolve, reject) => {
             this._implementations.repositoryImplementation.addUserToACompany(userId, companyId)

@@ -48,9 +48,20 @@ class RepositoryImplementationController {
 
     createCompanyFromUser(companyData) {
         return new Promise((resolve, reject) => {
+
+            console.log(companyData)
             connection.query('INSERT INTO Company SET ?', companyData, function (error, results, fields) {
-                if (error) reject(error);
+                if (error) {reject(error);}
                 resolve();
+            });
+        });
+    }
+
+    getCompanyByName(companyName){
+        return new Promise((resolve, reject) => {
+            connection.query(`SELECT * FROM Company WHERE name = '${companyName}'`, function (error, results, fields) {
+                if (error) reject(error);
+                resolve(results);
             });
         });
     }
