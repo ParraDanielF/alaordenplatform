@@ -4,7 +4,7 @@ const mysql = require('mysql');
 let connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'Root123*',
+    password: 'DBA2020',
     database: 'alaorden_dev'
 });
 

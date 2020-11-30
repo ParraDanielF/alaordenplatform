@@ -129,7 +129,7 @@ class ServiceController {
 
                         /** register notification, (user, companyId) */
                         let notificationsBodies = [{
-                            notificationMessage: `Se ha solicitado el servicio : ${data[0].name} exitosamente`,
+                            notificationMessage: ``,
                             readStatus: 0,
                             userId: contractData.userId,
                             contractId: data[0]['id'],
@@ -144,9 +144,11 @@ class ServiceController {
                         ];
 
                         notificationsBodies.forEach(async (notificationBody) => {
+                            let data = await this._repositoryController.getcontratedService(contractData.services[0]['serviceId']);
                             if (!notificationBody.notificationMessage) {
-                                let data = await this._repositoryController.getcontratedService(contractData.services[0]['serviceId']);
                                 notificationBody['notificationMessage'] = `Ha recibido una solicitud del servicio : ${data[0].name} el dia : ${contractData.date}`
+                            }else{
+                                notificationBody['notificationMessage'] = `Se ha solicitado el servicio : ${data[0].name} exitosamente`;
                             }
 
                             await this._repositoryController.createNotification(notificationBody)
