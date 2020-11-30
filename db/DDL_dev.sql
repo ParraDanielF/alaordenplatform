@@ -64,7 +64,7 @@ CREATE TABLE Company(
 	address VARCHAR(70) NOT NULL,
 	isActive BOOLEAN,
 	owner VARCHAR(50) NOT NULL,
-	segmentCode VARCHAR(10) NOT NULL,
+	segmentCode VARCHAR(10),
 	longitude FLOAT,
 	latitude FLOAT,
 	country INT,

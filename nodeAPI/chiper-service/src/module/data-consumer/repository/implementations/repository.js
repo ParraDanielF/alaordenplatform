@@ -4,7 +4,7 @@ const mysql = require('mysql');
 let connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'DBA2020',
+    password: 'Root123*',
     database: 'alaorden_dev'
 });
 
@@ -123,8 +123,8 @@ class RepositoryImplementationController {
     getContractsByUser(userId) {
         return new Promise((resolve, reject) => {
             connection.query(`SELECT c.id, s.name as service , cp.name as company, c.state FROM Contract c
-            JOIN contract_services cs ON cs.contractId = c.id 
-            JOIN company cp ON cp.id = c.companyId
+            JOIN Contract_Services cs ON cs.contractId = c.id 
+            JOIN Company cp ON cp.id = c.companyId
             JOIN service s ON cs.serviceId = s.id
             WHERE userId = ${userId}`, function (error, results, fields) {
                 if (error) reject(error);
@@ -144,7 +144,7 @@ class RepositoryImplementationController {
 
     getcontratedService(serviceId) {
         return new Promise((resolve, reject) => {
-            connection.query(`SELECT * FROM Service WHERE id = ${serviceId}` , function (error, results, fields) {
+            connection.query(`SELECT * FROM service WHERE id = ${serviceId}` , function (error, results, fields) {
                 if (error) reject(error);
                 resolve(results);
             });
@@ -192,7 +192,8 @@ class RepositoryImplementationController {
 
     searchServices(type, city, date) {
         return new Promise((resolve, reject) => {
-            connection.query("SELECT s.id as serviceId, s.*, cp.* FROM Service s "
+            let query =
+            connection.query("SELECT s.id as serviceId, s.*, cp.* FROM service s "
                 + " JOIN Company cp ON s.companyId = cp.id"
                 + " JOIN City ct ON ct.id = cp.city"
                 + ` WHERE s.serviceType = ${type}`
@@ -201,12 +202,13 @@ class RepositoryImplementationController {
                     if (error) reject(error);
                     resolve(results);
                 });
+            console.log(query.sql)
         });
     }
 
     getServicesByCompany(companyId) {
         return new Promise((resolve, reject) => {
-            connection.query(`SELECT * FROM Service WHERE companyId = '${companyId}'`, function (error, results, fields) {
+            connection.query(`SELECT * FROM service WHERE companyId = '${companyId}'`, function (error, results, fields) {
                 if (error) reject(error);
                 resolve(results)
             });
@@ -215,15 +217,17 @@ class RepositoryImplementationController {
 
     getContractDataToSeller(contractId) {
         return new Promise((resolve, reject) => {
-            connection.query(`SELECT s.name as serviceName, c.contractDate, c.description, ct.name as cityName FROM contract_services cs
-            JOIN contract c ON cs.contractId = c.id
+            let query =
+            connection.query(`SELECT s.name as serviceName, c.contractDate, c.description, ct.name as cityName FROM Contract_Services cs
+            JOIN Contract c ON cs.contractId = c.id
             JOIN service s ON cs.serviceId = s.id
-            JOIN company cp ON s.companyId = cp.id
-            JOIN city ct ON cp.city = ct.id
+            JOIN Company cp ON s.companyId = cp.id
+            JOIN City ct ON cp.city = ct.id
             where c.id = '${contractId}'`, function (error, results, fields) {
                 if (error) reject(error);
                 resolve(results[0])
             });
+            console.log(query.sql)
         });
     }
 
@@ -260,7 +264,7 @@ class RepositoryImplementationController {
 
     registerContractServices(contractServices) {
         return new Promise((resolve, reject) => {
-            connection.query('INSERT INTO contract_services (contractId, serviceId) VALUES ?'
+            connection.query('INSERT INTO Contract_Services (contractId, serviceId) VALUES ?'
                 , [contractServices.map(item => [item['contractId'], item['serviceId']])]
                 , function (error, results, fields) {
                     if (error) reject(error);
