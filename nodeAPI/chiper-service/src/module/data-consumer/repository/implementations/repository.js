@@ -120,6 +120,19 @@ class RepositoryImplementationController {
         });
     }
 
+    getContractsByUser(userId) {
+        return new Promise((resolve, reject) => {
+            connection.query(`SELECT c.id, s.name as service , cp.name as company, c.state FROM Contract c
+            JOIN contract_services cs ON cs.contractId = c.id 
+            JOIN company cp ON cp.id = c.companyId
+            JOIN service s ON cs.serviceId = s.id
+            WHERE userId = ${userId}`, function (error, results, fields) {
+                if (error) reject(error);
+                resolve(results);
+            });
+        });
+    }
+
     createNotification(notification) {
         return new Promise((resolve, reject) => {
             connection.query('INSERT INTO Notifications SET ?', notification, function (error, results, fields) {

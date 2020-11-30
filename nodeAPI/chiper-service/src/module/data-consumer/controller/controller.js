@@ -87,6 +87,16 @@ class MainController {
 
     }
 
+    getContractsByUser(req, res) {
+        const {userId} = req.params;
+        this._serviceController.getContractsByUser(userId)
+            .then(response => res.status(200).send(response))
+            .catch(err => {
+                res.status(400).send(err)
+            });
+
+    }
+
     updateNotificationState(req, res) {
         this._serviceController.updateNotificationState()
             .then(response => res.status(200).send(response))

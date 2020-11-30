@@ -30,6 +30,7 @@ router.post('/service/decision', MainController.SetDecision.bind(MainController)
 /** contract */
 router.post('/contract/create', MainController.createContract.bind(MainController));
 router.put('/contract/update', MainController.updateContract.bind(MainController));
+router.get('/:userId/list', MainController.getContractsByUser.bind(MainController));
 
 /** notification */
 router.get('/:userId/notifications', MainController.getNotificationsByUser.bind(MainController));

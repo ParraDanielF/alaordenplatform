@@ -99,6 +99,14 @@ class RepositoryController {
         });
     }
 
+    getContractsByUser(userId) {
+        return new Promise((resolve, reject) => {
+            this._implementations.repositoryImplementation.getContractsByUser(userId)
+                .then(res => resolve(res))
+                .catch(err => reject(err))
+        });
+    }
+
     createNotification(notification) {
         return new Promise((resolve, reject) => {
             this._implementations.repositoryImplementation.createNotification(notification)

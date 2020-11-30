@@ -129,22 +129,24 @@ class ServiceController {
 
                         /** register notification, (user, companyId) */
                         let notificationsBodies = [{
-                            notificationMessage: `Se ha solicitado el servicio exitosamente`,
+                            notificationMessage: `Se ha solicitado el servicio : ${data[0].name} exitosamente`,
                             readStatus: 0,
                             userId: contractData.userId,
-                            contractId: data[0]['id']
+                            contractId: data[0]['id'],
+                            createdAt : new Date()
                         },
                         {
                             readStatus: 0,
                             userId: contractData.companyOwner,
-                            contractId: data[0]['id']
+                            contractId: data[0]['id'],
+                            createdAt : new Date()
                         }
                         ];
 
                         notificationsBodies.forEach(async (notificationBody) => {
                             if (!notificationBody.notificationMessage) {
                                 let data = await this._repositoryController.getcontratedService(contractData.services[0]['serviceId']);
-                                notificationBody['notificationMessage'] = `Ha recibido una solicitud del servicio ${data[0].name} el dia ${contractData.date}`
+                                notificationBody['notificationMessage'] = `Ha recibido una solicitud del servicio : ${data[0].name} el dia : ${contractData.date}`
                             }
 
                             await this._repositoryController.createNotification(notificationBody)
@@ -166,6 +168,16 @@ class ServiceController {
                     resolve({
                         message: 'Success'
                     })
+                })
+                .catch(err => reject(err))
+        });
+    }
+
+    getContractsByUser(userId) {
+        return new Promise((resolve, reject) => {
+            this._repositoryController.getContractsByUser(userId)
+                .then(res => {
+                    resolve(res)
                 })
                 .catch(err => reject(err))
         });
